@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<packet>
+	<webspace>
+	<get>
+		<filter>
+			<name>$name</name>
+		</filter>
+		<dataset>
+			<gen_info/>
+			<disk_usage/>
+		</dataset>
+	</get>
+	</webspace>
+</packet>

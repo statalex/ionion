@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<packet version="1.6.3.0">
+<mail>
+<update>
+   <add>
+      <filter>
+          <site-id>$id</site-id>
+          <mailname>
+              <name>$name</name>
+          </mailname>
+      </filter>
+   </add>
+</update>
+</mail>
+</packet>
