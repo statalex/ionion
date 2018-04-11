@@ -7,9 +7,11 @@ public class Main {
 
 	public static void main(String[] args) throws Exception 
 	{
-		String host = "alcinia.gr";
-		String login = "stathis036636";
-		String password = "upN7J6Pa";
+		String host = "";
+		String login = "";
+		String password = "";
+		
+		//hello
 
 		PleskApiClient client = new PleskApiClient(host);
 		client.setCredentials(login, password);
