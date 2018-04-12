@@ -1,10 +1,8 @@
-import java.io.File;
 import java.io.StringReader;
 import java.util.List;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
-import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
@@ -86,45 +84,28 @@ public class Dom4jTest {
 	
 	
 	
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) 
 	{
 		StringReader strReader = new StringReader(str2);
 		try 
 		{
-			File inputFile = new File("input.txt");
 			SAXReader reader = new SAXReader();
 			Document document = reader.read( strReader/*inputFile*/ );
 
 			System.out.println("Root element :" + document.getRootElement().getName());
-			Element packetElm = document.getRootElement();
 			List<Node> nodeList = document.selectNodes("/packet/webspace/get/result" );
 			Node resultNode = nodeList.get(0);
 			nodeList = resultNode.selectNodes("status" );
 			System.out.println( "Status = "+getValue( resultNode, "status"));
 			System.out.println( "ID = "+getValue( resultNode, "id"));
-//			System.out.println( nodeList.get(0).getName());
-//			System.out.println( nodeList.get(0).getText());
-/*			
-			Element classElement = document.getRootElement();
-			List<Node> nodes = document.selectNodes("/class/student[@rollno = '493']" );
-			System.out.println("----------------------------");
-	         
-			for (Node node : nodes) 
-			{
-				System.out.println("\nCurrent Element :" + node.getName());
-				System.out.println("Student roll no : " + node.valueOf("@rollno") );
-				System.out.println("First Name : " + node.selectSingleNode("firstname").getText());
-				System.out.println("Last Name : " + node.selectSingleNode("lastname").getText());
-				System.out.println("First Name : " + node.selectSingleNode("nickname").getText());
-				System.out.println("Marks : " + node.selectSingleNode("marks").getText());
-			}
-*/			
 		} catch (DocumentException e) 
 		{
 			e.printStackTrace();
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	static String getValue( Node node, String path)
 	{
 		List<Node> nodeList = node.selectNodes( path );

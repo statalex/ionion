@@ -2,9 +2,10 @@ package gr.rege.ionion.info;
 
 import java.io.StringReader;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.apache.velocity.VelocityContext;
 import org.dom4j.Document;
-import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import gr.rege.ionion.PleskApiClient;
@@ -13,6 +14,8 @@ import gr.rege.ionion.helper.PleskUtil;
 
 public class DomainInfo 
 {
+	static Logger log = LogManager.getLogger( DomainInfo.class);
+	
 	public int id;
 	public String name;
 	public String ipAddress;
@@ -21,12 +24,13 @@ public class DomainInfo
 
 	public DiskUsageInfo usage;
 
-	public void parse( PleskApiClient client, String name) throws Exception
+	public DomainInfo parse( PleskApiClient client, String name) throws Exception
 	{
 		PleskUtil util = new PleskUtil();
 		VelocityContext ctx = new VelocityContext();
 		ctx.put("name", name);
 		String response = client.request( util.getRequest("domain_info_req", ctx));
+		log.debug( response);
 		StringReader strReader = new StringReader( response);
 		SAXReader reader = new SAXReader();
 		Document document = reader.read( strReader );
@@ -51,6 +55,7 @@ public class DomainInfo
 		di.webapps = util.asInt("webapps");
 		di.maillists = util.asInt("maillists");
 		di.configs = util.asInt("configs");
+		return this;
 	}
 
 }

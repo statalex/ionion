@@ -1,12 +1,11 @@
 package gr.rege.ionion.info;
 
 import java.io.StringReader;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.apache.velocity.VelocityContext;
-import org.dom4j.Branch;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.Node;
@@ -18,18 +17,19 @@ import gr.rege.ionion.helper.XmlMap;
 
 public class SubscriptionInfo 
 {
+	static Logger log = LogManager.getLogger( SubscriptionInfo.class);
+	
 	public static int d;
 	public int diskSpace;
 	public int mailboxQuota;
 	
-	public void parse( PleskApiClient client, String name) throws Exception
+	public SubscriptionInfo parse( PleskApiClient client, String name) throws Exception
 	{
 		PleskUtil util = new PleskUtil();
 		VelocityContext ctx = new VelocityContext();
 		ctx.put("name", name);
 		String response = client.request( util.getRequest("subscription_info_req", ctx));
-//		System.out.println( response);
-		
+		log.debug(response);
 		StringReader strReader = new StringReader( response);
 		SAXReader reader = new SAXReader();
 		Document document = reader.read( strReader );
@@ -43,6 +43,7 @@ public class SubscriptionInfo
 		}
 		diskSpace = map.getInt("disk_space");
 		mailboxQuota = map.getInt("mbox_quota");
+		return this;
 	}
 
 }
