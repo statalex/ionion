@@ -2,8 +2,9 @@ package gr.rege.ionion.helper;
 
 import java.io.StringWriter;
 import java.util.List;
-import java.util.Map;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -13,6 +14,8 @@ import org.dom4j.Node;
 
 public class PleskUtil 
 {
+	static Logger log = LogManager.getLogger( PleskUtil.class);
+
 	private Node curNode;
 	private static String tmplPath="gr/rege/ionion/templates/";
 
@@ -26,6 +29,7 @@ public class PleskUtil
         Template t = ve.getTemplate( tmplPath+tmplName+".vm" );
         StringWriter writer = new StringWriter();
         t.merge( ctx, writer );
+        log.debug( writer.toString());
         return writer.toString();
 	}
 	
@@ -46,6 +50,7 @@ public class PleskUtil
 		return curNode.selectSingleNode( path );
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Node> getNodeList(String path) 
 	{	
 		return curNode.selectNodes( path );

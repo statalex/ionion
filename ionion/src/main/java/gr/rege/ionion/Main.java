@@ -1,32 +1,31 @@
 package gr.rege.ionion;
 
-import java.io.File;
 
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
-import org.apache.commons.configuration2.CompositeConfiguration;
-import org.apache.commons.configuration2.builder.fluent.Configurations;
-import org.apache.commons.configuration2.ex.ConfigurationException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import gr.rege.ionion.helper.ExtCommandLine;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import gr.rege.ionion.helper.ByteUsage;
 import gr.rege.ionion.helper.PleskEnv;
-import gr.rege.ionion.info.SubscriptionInfo;
 
 public class Main 
 {
-	static Logger logger = LoggerFactory.getLogger( Main.class);
+//	static Logger log = LogManager.getLogger( Main.class);
 	
 
 	public static void main(String[] args) throws Exception 
 	{
+		new ByteUsage("128");
+		new ByteUsage("128K");
+		new ByteUsage("128M");
+		new ByteUsage("128G");
+		new ByteUsage("128%");
+		System.exit(0);
+		System.out.println("Started");
+
 		PleskEnv env = PleskEnv.get(args);
-		
-		
 		switch( env.mode)
 		{
 			case DOMAIN :
@@ -38,5 +37,25 @@ public class Main
 	}
 
 
-	
+	static void test( String str) 
+	{
+
+//		Pattern pattern = Pattern.compile("[0-9]+");
+//		Matcher matcher = pattern.matcher( str);
+		Matcher matcher = Pattern.compile("[0-9]+").matcher( str);
+        if( matcher.find())
+        {
+        	System.out.println("Size is "+matcher.group());
+    		System.out.println( matcher.start());
+    		System.out.println( matcher.end());
+    		matcher = Pattern.compile("[KMG%]").matcher( str);
+            if( matcher.find())
+            {
+            	System.out.println("Unit is "+matcher.group() );
+        		System.out.println( matcher.start());
+        		System.out.println( matcher.end());
+            }
+        }
+	}
+
 }
