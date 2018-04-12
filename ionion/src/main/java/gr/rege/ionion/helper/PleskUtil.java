@@ -11,7 +11,7 @@ import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.dom4j.Node;
 
-public class ParseUtil 
+public class PleskUtil 
 {
 	private Node curNode;
 	private static String tmplPath="gr/rege/ionion/templates/";
@@ -68,6 +68,16 @@ public class ParseUtil
 	public String asString( String path)
 	{
 		return getText(path);
+	}
+
+	public static int getInt( Node node)
+	{
+		return new Integer( node.getText());
+	}
+
+	public static String getString( Node node)
+	{
+		return node.getText();
 	}
 
 }

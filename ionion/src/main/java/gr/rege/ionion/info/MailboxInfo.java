@@ -7,13 +7,13 @@ import org.dom4j.Document;
 import org.dom4j.io.SAXReader;
 
 import gr.rege.ionion.PleskApiClient;
-import gr.rege.ionion.helper.ParseUtil;
+import gr.rege.ionion.helper.PleskUtil;
 
 public class MailboxInfo 
 {
 	public void parse( PleskApiClient client, String name) throws Exception
 	{
-		ParseUtil util = new ParseUtil();
+		PleskUtil util = new PleskUtil();
 		VelocityContext ctx = new VelocityContext();
 		ctx.put("name", name);
 		String response = client.request( util.getRequest("domain_info_req", ctx));
