@@ -4,15 +4,15 @@ package gr.rege.ionion;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import gr.rege.ionion.helper.ByteUsage;
 import gr.rege.ionion.helper.PleskEnv;
 
 public class Main 
 {
-//	static Logger log = LogManager.getLogger( Main.class);
+	static Logger log = LogManager.getLogger( Main.class);
 	
 
 	public static void main(String[] args) throws Exception 

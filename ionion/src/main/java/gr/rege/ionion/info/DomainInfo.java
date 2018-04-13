@@ -2,8 +2,8 @@ package gr.rege.ionion.info;
 
 import java.io.StringReader;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.velocity.VelocityContext;
 import org.dom4j.Document;
 import org.dom4j.io.SAXReader;
