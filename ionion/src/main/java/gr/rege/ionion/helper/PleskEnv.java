@@ -15,7 +15,8 @@ import org.apache.logging.log4j.Logger;
 
 import gr.rege.ionion.PleskApiClient;
 import gr.rege.ionion.RunMode;
-import gr.rege.ionion.unit.ByteUsage;
+import gr.rege.ionion.unit.ByteQty;
+import gr.rege.ionion.unit.Threshold;
 
 public class PleskEnv 
 {
@@ -26,8 +27,9 @@ public class PleskEnv
 	public String password = null;
 	public String domain = null;
 	public RunMode mode = null;
-	public ByteUsage warning = new ByteUsage("75%");
-	public ByteUsage error = new ByteUsage("90%");
+	public ByteQty warning = null;
+	public ByteQty critical = null;
+	public Threshold threshold;
 
 	public PleskApiClient client;
 	
@@ -39,7 +41,7 @@ public class PleskEnv
 	private Option domainOption		= new Option( "d", "domain", true, "domain to be examined" );
 	private Option modeOption		= new Option( "m", "mode", true, "Can be one of (domain, mbox)" );
 	private Option warningOption	= new Option( "w", "warning", true, "Warning level. default 75%" );
-	private Option errorOption		= new Option( "e", "error", true, "Error level. default 90%" );
+	private Option criticalOption	= new Option( "c", "critical", true, "Critical level. default 90%" );
 
 	private Options options = new Options();
 	
@@ -50,10 +52,11 @@ public class PleskEnv
 		this.args = theArgs;
 		try 
 		{
+			readConfig();
 			readCommandLine();
 		} catch (Exception e) 
 		{
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 		client = new PleskApiClient( address);
 		client.setCredentials(login, password);
@@ -69,14 +72,13 @@ public class PleskEnv
 	private void readCommandLine() throws Exception
 	{
 		log.trace("Got it");
-		readConfig();
 		options.addOption( helpOption);
 		options.addOption( addressOption);
 		options.addOption( userOption);
 		options.addOption( passwordOption);
 		options.addOption( domainOption);
 		options.addOption( warningOption);
-		options.addOption( errorOption);
+		options.addOption( criticalOption);
 		options.addOption( modeOption);
 
 		CommandLineParser parser = new DefaultParser();
@@ -92,9 +94,9 @@ public class PleskEnv
 		if( cli.hasOption(domainOption))
 			domain = cli.getOptionValue( domainOption);
 		if( cli.hasOption( warningOption))
-			warning = new ByteUsage( cli.getOptionValue( warningOption));
-		if( cli.hasOption( errorOption))
-			error = new ByteUsage( cli.getOptionValue( errorOption));
+			warning = new ByteQty( cli.getOptionValue( warningOption));
+		if( cli.hasOption( criticalOption))
+			critical = new ByteQty( cli.getOptionValue( criticalOption));
 		if( cli.hasOption(modeOption))
 		{
 			try 
@@ -108,6 +110,7 @@ public class PleskEnv
 		if( password==null)	usage(options, "");
 		if( domain==null)	usage(options, "");
 		if( mode==null)		usage(options, "");
+		threshold = new Threshold(warning, critical);
 	}
 
 	private void usage( Options options, String msg)
@@ -117,6 +120,14 @@ public class PleskEnv
 		System.exit(3);
 	}
 	
+	/*
+	 * We want three methods of specifying threshold
+	 * 1. Threshold of USED BYTES
+	 * 2. Threshold of USED PERCENTAGE
+	 * 3. Threshold of FREE BYTES
+	 * 
+	 * currently we have the implementation of the first two methods
+	 */
 	private void readConfig() throws ConfigurationException
 	{
 		CompositeConfiguration cfg = new CompositeConfiguration();
@@ -128,6 +139,8 @@ public class PleskEnv
 	    login = cfg.getString("plesk.login");
 	    password = cfg.getString("plesk.password");
 	    domain = cfg.getString("plesk.domain");
+	    warning = new ByteQty(cfg.getString("threshold.warning"));
+	    critical = new ByteQty(cfg.getString("threshold.critical"));
 	}
 
 

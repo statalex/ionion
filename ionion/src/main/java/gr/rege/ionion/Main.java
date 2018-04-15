@@ -8,31 +8,39 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import gr.rege.ionion.helper.PleskEnv;
-import gr.rege.ionion.unit.ByteUsage;
+import gr.rege.ionion.unit.ByteQty;
 
 public class Main 
 {
 	static Logger log = LogManager.getLogger( Main.class);
 	
 
-	public static void main(String[] args) throws Exception 
+	public static void main(String[] args) 
 	{
-		new ByteUsage("128");
-		new ByteUsage("128K");
-		new ByteUsage("128M");
-		new ByteUsage("128G");
-		new ByteUsage("128%");
+		ByteQty usage = new ByteQty(120);
+		ByteQty total = new ByteQty(200);
+		
+		float p = ((float )usage.toBytes() / (float )total.toBytes()) * 100;
+
+		System.out.println( p);
 		System.exit(0);
 		System.out.println("Started");
 
-		PleskEnv env = PleskEnv.get(args);
-		switch( env.mode)
+		try 
 		{
-			case DOMAIN :
-				new DomainChecker(env).check();
-				break;
-			case MBOX :
-				break;
+			PleskEnv env = PleskEnv.get(args);
+			switch( env.mode)
+			{
+				case DOMAIN :
+					new DomainChecker(env).check();
+					break;
+				case MBOX :
+					break;
+			}
+			
+		} catch (Exception e) 
+		{
+			System.out.println("Error");
 		}
 	}
 
