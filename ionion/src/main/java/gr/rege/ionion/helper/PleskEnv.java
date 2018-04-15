@@ -56,7 +56,7 @@ public class PleskEnv
 			readCommandLine();
 		} catch (Exception e) 
 		{
-			throw new RuntimeException(e);
+			PleskStatus.applicationError( "Invalid configuration");
 		}
 		client = new PleskApiClient( address);
 		client.setCredentials(login, password);

@@ -10,4 +10,7 @@ public enum ThresholdLevel
 	{
 		this.value = theValue;
 	}
+
+	public int getStatusCode() { return value; }
+	
 }

@@ -6,8 +6,6 @@ import java.util.regex.Pattern;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import gr.rege.ionion.Main;
-
 public class ByteQty
 {
 	static Logger log = LogManager.getLogger( ByteQty.class);
@@ -17,6 +15,8 @@ public class ByteQty
 	
 	public ByteQty( String str) 
 	{
+		if( str == null || str.trim().length() == 0)
+			str = "0";
 		Matcher matcher = Pattern.compile("[0-9]+").matcher( str);
         if( matcher.find())
         {
@@ -46,6 +46,11 @@ public class ByteQty
 	public int toBytes()
 	{
 		return quantity * factor.getFactor();
+	}
+	
+	public String toString()
+	{
+		return quantity+factor.getSymbol();
 	}
 	
 	public ByteQty convertTo( ByteFactor theFactor)

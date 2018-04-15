@@ -13,9 +13,7 @@
 		<appender-ref ref="console" /> 
 	</root>
 		
-	<logger name="gr.rege.ionion.helper.PleskUtil">
-		<priority value="trace" />
-	</logger>		
+	<logger name="gr.rege.ionion.helper.PleskUtil">			<priority value="trace" />	</logger>		
 	<logger name="gr.rege.ionion.info.DomainInfo">			<priority value="trace" />	</logger>		
 	<logger name="gr.rege.ionion.info.SubscriptionInfo">	<priority value="trace" />	</logger>		
 
