@@ -31,7 +31,7 @@ public class DomainChecker
 			PleskStatus.usageStatus( env.threshold, domain.realSize, subscription.diskSpace, "");
 		} catch (Exception e) 
 		{
-			PleskStatus.applicationError("Something went wrong");
+			PleskStatus.applicationError(e.getMessage());
 		}
 	}
 	

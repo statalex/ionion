@@ -13,12 +13,13 @@ public class PleskStatus
 		System.exit( ThresholdLevel.UNKNOWN.getStatusCode());
 	}
 
-	public static void usageStatus( Threshold threshold, int used, int total, String msg)
+	public static void usageStatus( Threshold threshold, long used, long total, String msg)
 	{
 		ByteQty usedQty = new ByteQty(used);
 		ByteQty totalQty = new ByteQty( total);
 		ThresholdLevel level = threshold.checkLevel( usedQty, totalQty);
-		msg = msg+String.format("%s of %s", usedQty.toString(), totalQty.toString());
+		String levelName = level.name();
+		msg = msg+String.format("%s - %s of %s", levelName, usedQty.toString(), totalQty.toString());
 		System.out.println(msg);
 		System.exit( level.getStatusCode());
 	}

@@ -70,6 +70,11 @@ public class PleskUtil
 		return new Integer( getText(path));
 	}
 
+	public long asLong( String path)
+	{
+		return new Long( getText(path));
+	}
+
 	public String asString( String path)
 	{
 		return getText(path);
@@ -78,6 +83,11 @@ public class PleskUtil
 	public static int getInt( Node node)
 	{
 		return new Integer( node.getText());
+	}
+
+	public static long getLong( Node node)
+	{
+		return new Long( node.getText());
 	}
 
 	public static String getString( Node node)

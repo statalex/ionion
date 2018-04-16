@@ -44,4 +44,9 @@ public class XmlMap extends HashMap<String, String>
 		return new Integer( super.get(key));
 	}
 
+	public Long getLong(String key)
+	{
+		return new Long( super.get(key));
+	}
+	
 }

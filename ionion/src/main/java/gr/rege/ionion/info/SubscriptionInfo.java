@@ -20,8 +20,8 @@ public class SubscriptionInfo
 	static Logger log = LogManager.getLogger( SubscriptionInfo.class);
 	
 	public static int d;
-	public int diskSpace;
-	public int mailboxQuota;
+	public long diskSpace;
+	public long mailboxQuota;
 	
 	public SubscriptionInfo parse( PleskApiClient client, String name) throws Exception
 	{
@@ -41,8 +41,8 @@ public class SubscriptionInfo
 			if( node.getNodeType() == Node.ELEMENT_NODE)
 				map.putNamedValue( (Element)node);
 		}
-		diskSpace = map.getInt("disk_space");
-		mailboxQuota = map.getInt("mbox_quota");
+		diskSpace = map.getLong("disk_space");
+		mailboxQuota = map.getLong("mbox_quota");
 		return this;
 	}
 

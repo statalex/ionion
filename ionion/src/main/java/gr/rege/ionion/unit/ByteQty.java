@@ -10,7 +10,7 @@ public class ByteQty
 {
 	static Logger log = LogManager.getLogger( ByteQty.class);
 
-	private int quantity;
+	private long quantity;
 	private ByteFactor factor = ByteFactor.single;
 	
 	public ByteQty( String str) 
@@ -20,7 +20,7 @@ public class ByteQty
 		Matcher matcher = Pattern.compile("[0-9]+").matcher( str);
         if( matcher.find())
         {
-        	quantity = new Integer(matcher.group());
+        	quantity = new Long(matcher.group());
     		matcher = Pattern.compile("[KMG%]").matcher( str);
             if( matcher.find())
             {
@@ -30,12 +30,12 @@ public class ByteQty
         }
 	}
 
-	public ByteQty( int theQty) 
+	public ByteQty( long theQty) 
 	{
 		this( theQty, ByteFactor.single);
 	}
 
-	public ByteQty( int theQty, ByteFactor theFactor) 
+	public ByteQty( long theQty, ByteFactor theFactor) 
 	{
 		this.quantity = theQty;
 		this.factor = theFactor;
@@ -43,7 +43,7 @@ public class ByteQty
 
 	
 	
-	public int toBytes()
+	public long toBytes()
 	{
 		return quantity * factor.getFactor();
 	}
@@ -55,24 +55,24 @@ public class ByteQty
 	
 	public ByteQty convertTo( ByteFactor theFactor)
 	{
-		int newQty = toBytes() / theFactor.getFactor();
+		long newQty = toBytes() / theFactor.getFactor();
 		return new ByteQty(newQty, theFactor) ;
 	}
 	
 	public int compareTo( ByteQty other) 
 	{
-		int thisBytes = this.toBytes();
-		int theBytes = other.toBytes();
+		long thisBytes = this.toBytes();
+		long theBytes = other.toBytes();
 		if( thisBytes<theBytes) return -1;
 		if( thisBytes>theBytes) return 1;
 		return 0;
 	}
 
-	public int getQuantity() {
+	public long getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity( long quantity) {
 		this.quantity = quantity;
 	}
 

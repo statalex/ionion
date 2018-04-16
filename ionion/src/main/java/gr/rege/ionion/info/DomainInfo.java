@@ -20,7 +20,7 @@ public class DomainInfo
 	public String name;
 	public String ipAddress;
 	public String status;
-	public int realSize;
+	public long realSize;
 
 	public DiskUsageInfo usage;
 
@@ -40,21 +40,21 @@ public class DomainInfo
 		util.setCurNode("data/gen_info");
 		name=util.asString("name");
 		ipAddress=util.asString("dns_ip_address");
-		realSize=util.asInt("real_size");
+		realSize=util.asLong("real_size");
 		util.setCurNode( document.selectSingleNode("/packet/webspace/get/result/data/disk_usage" ));
 		DiskUsageInfo di = new DiskUsageInfo();
-		di.http_docs = util.asInt("httpdocs");
-		di.http_docs = util.asInt("httpsdocs");
-		di.subdomains = util.asInt("subdomains");
-		di.web_users = util.asInt("web_users");
-		di.anonftp = util.asInt("anonftp");
-		di.logs = util.asInt("logs");
-		di.dbases = util.asInt("dbases");
-		di.mailboxes = util.asInt("mailboxes");
-		di.domaindumps = util.asInt("domaindumps");
-		di.webapps = util.asInt("webapps");
-		di.maillists = util.asInt("maillists");
-		di.configs = util.asInt("configs");
+		di.http_docs = util.asLong("httpdocs");
+		di.http_docs = util.asLong("httpsdocs");
+		di.subdomains = util.asLong("subdomains");
+		di.web_users = util.asLong("web_users");
+		di.anonftp = util.asLong("anonftp");
+		di.logs = util.asLong("logs");
+		di.dbases = util.asLong("dbases");
+		di.mailboxes = util.asLong("mailboxes");
+		di.domaindumps = util.asLong("domaindumps");
+		di.webapps = util.asLong("webapps");
+		di.maillists = util.asLong("maillists");
+		di.configs = util.asLong("configs");
 		return this;
 	}
 
