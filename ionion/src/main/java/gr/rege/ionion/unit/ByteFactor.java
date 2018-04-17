@@ -4,12 +4,12 @@ public class ByteFactor
 {
 	
 	private String symbol;
-	private int factor;
+	private long factor;
 	private boolean isPercentage;
 	
 
 
-	private ByteFactor( int theFactor, String theSymbol, boolean thePercentage) 
+	private ByteFactor( long theFactor, String theSymbol, boolean thePercentage) 
 	{
 		this.symbol = theSymbol;
 		this.factor = theFactor;
@@ -21,7 +21,7 @@ public class ByteFactor
 		return this.symbol;
 	}
 	
-	public int getFactor()
+	public long getFactor()
 	{
 		return this.factor;
 	}
@@ -46,7 +46,7 @@ public class ByteFactor
 	}
 
 	public static ByteFactor single = new ByteFactor(1, "", false);
-	public static ByteFactor percent = new ByteFactor(1, "", true);
+	public static ByteFactor percent = new ByteFactor(1, "%", true);
 	public static ByteFactor kilo = new ByteFactor(1024, "K", false);
 	public static ByteFactor mega = new ByteFactor(1024*1024, "M", false);
 	public static ByteFactor giga = new ByteFactor(1024*1024*1024, "G", false);

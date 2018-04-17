@@ -14,7 +14,9 @@
 	</root>
 		
 	<logger name="gr.rege.ionion.helper.PleskUtil">			<priority value="trace" />	</logger>		
+	<logger name="gr.rege.ionion.helper.PleskStatus">		<priority value="trace" />	</logger>		
 	<logger name="gr.rege.ionion.info.DomainInfo">			<priority value="trace" />	</logger>		
 	<logger name="gr.rege.ionion.info.SubscriptionInfo">	<priority value="trace" />	</logger>		
+	<logger name="gr.rege.ionion.Main">						<priority value="trace" />	</logger>		
 
 </log4j:configuration>

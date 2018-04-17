@@ -26,7 +26,7 @@ public class Main
 //		float p = ((float )usage.toBytes() / (float )total.toBytes()) * 100;
 //		System.out.println( p);
 //		System.exit(0);
-		log.trace( "Started");
+		log.error( "Started");
 
 		try 
 		{

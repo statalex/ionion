@@ -53,6 +53,20 @@ public class ByteQty
 		return quantity+factor.getSymbol();
 	}
 	
+	public String toHuman()
+	{
+		if( factor.isPercentage())
+			return quantity+"%";
+		long bytes = toBytes();
+		if( bytes < ByteFactor.kilo.getFactor())
+			return bytes+"";
+		if( bytes < ByteFactor.mega.getFactor())
+			return (bytes/ByteFactor.kilo.getFactor())+"K";
+		if( bytes < ByteFactor.giga.getFactor())
+			return (bytes/ByteFactor.mega.getFactor())+"M";
+		return (bytes/ByteFactor.giga.getFactor())+"G";
+	}
+	
 	public ByteQty convertTo( ByteFactor theFactor)
 	{
 		long newQty = toBytes() / theFactor.getFactor();
