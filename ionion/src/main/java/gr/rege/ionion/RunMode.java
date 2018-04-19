@@ -4,7 +4,7 @@ public enum RunMode
 {
 
 //	DOMAIN("domain"), MBOX("mbox");
-	DOMAIN, MBOX;
+	DOMAIN, MBOX, LOGS;
 	
 	public static RunMode value( String str)
 	{

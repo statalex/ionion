@@ -1,16 +1,11 @@
 package gr.rege.ionion;
 
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import gr.rege.ionion.helper.PleskEnv;
 import gr.rege.ionion.helper.PleskStatus;
-import gr.rege.ionion.unit.ByteQty;
-import gr.rege.ionion.unit.ThresholdLevel;
 
 public class Main 
 {
@@ -19,14 +14,8 @@ public class Main
 
 	public static void main(String[] args) 
 	{
-//		PleskStatus.statusError( "Invalid configuration");
-//		ByteQty usage = new ByteQty(120);
-//		ByteQty total = new ByteQty(200);
-		
-//		float p = ((float )usage.toBytes() / (float )total.toBytes()) * 100;
-//		System.out.println( p);
-//		System.exit(0);
-		log.error( "Started");
+		System.out.println( "#1");
+//		log.trace( "Started");
 
 		try 
 		{
@@ -34,9 +23,12 @@ public class Main
 			switch( env.mode)
 			{
 				case DOMAIN :
-					new DomainChecker(env).check();
+					new DiskUsageChecker(env).checkDomain();
 					break;
 				case MBOX :
+					break;
+				case LOGS :
+					new DiskUsageChecker(env).checkLog();
 					break;
 			}
 			

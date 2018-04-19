@@ -2,6 +2,7 @@ package gr.rege.ionion.helper;
 
 public class PleskError extends RuntimeException 
 {
+	private static final long serialVersionUID = 2624546277577509197L;
 
 	public PleskError() 
 	{
